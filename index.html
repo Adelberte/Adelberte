@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доктор Скальпель - Хирург-специалист</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #c0c0c0;
+            line-height: 1.6;
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header стили */
+        header {
+            background-color: #111;
+            padding: 20px 0;
+            border-bottom: 3px solid #8b0000;
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            color: #8b0000;
+            font-size: 2.5rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: #e0e0e0;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text p {
+            color: #8b0000;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #c0c0c0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #8b0000;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #8b0000;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero секция */
+        .hero {
+            padding: 60px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .doctor-photo {
+            flex: 1;
+            position: relative;
+        }
+        
+        .doctor-photo img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 3px solid #333;
+            filter: grayscale(30%) contrast(110%);
+        }
+        
+        .photo-frame {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            z-index: -1;
+        }
+        
+        .doctor-info {
+            flex: 1;
+        }
+        
+        .doctor-info h2 {
+            font-size: 2.5rem;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .doctor-info h2 span {
+            color: #8b0000;
+        }
+        
+        .doctor-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .specialty {
+            color: #8b0000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 3px solid #8b0000;
+            padding-left: 15px;
+            margin: 25px 0;
+            color: #a0a0a0;
+        }
+        
+        /* Галерея работ */
+        .gallery-section {
+            padding: 50px 0;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #8b0000;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            height: 250px;
+            transition: transform 0.3s ease;
+            border: 2px solid #333;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: #8b0000;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: sepia(30%) contrast(110%);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Раздел отзывов */
+        .reviews-section {
+            padding: 50px 0;
+            margin-bottom: 50px;
+        }
+        
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .review-card {
+            background-color: #111;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b0000;
+        }
+        
+        .review-card::before {
+            content: '“';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 5rem;
+            color: #8b0000;
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border: 2px solid #8b0000;
+        }
+        
+        .review-avatar i {
+            font-size: 1.8rem;
+            color: #8b0000;
+        }
+        
+        .review-author h4 {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .review-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .review-text {
+            color: #c0c0c0;
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .review-rating {
+            margin-top: 15px;
+            color: #ffcc00;
+        }
+        
+        .review-rating i {
+            margin-right: 3px;
+        }
+        
+        .review-badge {
+            display: inline-block;
+            background-color: #8b0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #111;
+            padding: 40px 0;
+            border-top: 3px solid #8b0000;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info i {
+            color: #8b0000;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Медиа-запросы */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery, .reviews-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .doctor-info h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .review-card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .review-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .review-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .review-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        
+        /* Заметки к фотографиям */
+        .photo-note {
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ВРАЧ-РАЗРУШИТЕЛЬ</h1>
+                        
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">О враче</a></li>
+                        <li><a href="#gallery">Работы</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#add-review">Добавить отзыв</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="hero" id="about">
+            <div class="doctor-photo">
+                <div class="photo-frame"></div>
+                <img src="1ФОТО.jpg" alt="Доктор Скальпель" id="doctor-image">
+                <p class="photo-note">Ваганян Симон Погосович</p>
+            </div>
+            <div class="doctor-info">
+                <h2>СИМОН <span>ДЕТСКИЙ-ЗУБОДЁР</span></h2>
+                <p class="specialty">СТОМАТОЛОГ НИЗШЕЙ КАТЕГЕОРИИ</p>
+                <p>Граждане! Пока вы спали, среди нас поселился зубной вампир в белом халате.</p>
+                <p>Его имя — Ваганян Симон, но мы знаем его истинную суть. Он — финал эволюции халтуры, живое доказательство того, как система здравоохранения порождает монстров для наживы.
+                Он не врач. Он — мелкий тиран ротовой полости. Его кабинет — не поликлиника, а частная камера пыток, где боль — это бизнес-модель, а невылеченный зуб — источник вечного дохода. Его главный инструмент — не бормашина, а ложь, запугивание и искусственное создание проблем.</p>
+<p>Его принципы:</p>
+<p>Ни одного здорового зуба не оставим! Он найдёт «кариес» там, где его нет.</p>
+<p>Лечение — это война. Ваш рот — поле боя, а ваши деньги — трофей.</p>
+<p>Его жертвы: дети, чьи челюсти он калечит намеренно; взрослые, оставшиеся с культями вместо зубов; пенсионеры, отдавшие последние сбережения за фантомную боль.</p>
+<p>Делитесь своими историями. Пусть каждый его прокол, каждый кривой корень станет кирпичиком в стене его позора. Не дайте ему заработать на вашей боли!</p>
+                
+                <p>Он не лечит зубы — он их конфискует.</p>
+                <div class="contact-info" style="margin-top: 20px;">
+                    <div><i class="fas fa-phone"></i> <span>+7 (995) 288-01-88</span></div>
+                    <div><i class="fas fa-map-marker-alt"></i> <span>г. Аксай, ул. Строителей 10/6к1.</span></div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <section class="reviews-section" id="reviews">
+            <h2 class="section-title">Хроники разрушений</h2>
+            <p style="text-align: center; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">Это не просто истории. Это — доказательства. Каждая строчка здесь является уликой в народном расследовании. Если вы тоже стали мишенью его «лечения», ваше свидетельство может стать решающим. Добавьте свою историю. Давайте создадим летопись его провалов вместе.</p>
+            
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Анастасия В.</h4>
+                            <div class="review-date">15 марта 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Доктор Скальпель спас мне жизнь, когда все другие врачи уже отказались. Его подход пугающе прямолинеен, но именно это и нужно в критической ситуации. Операция прошла безупречно, шрам почти не заметен.
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-badge">Сложная операция</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-ninja"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Михаил К.</h4>
+                            <div class="review-date">8 ноября 2022</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Кабинет доктора выглядит как декорация к фильму ужасов, но его профессиональные навыки безупречны. После проведенной им операции я чувствую себя лучше, чем когда-либо за последние 10 лет. Страшновато, но эффективно.
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="review-badge">Хроническое заболевание</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Елена С.</h4>
+                            <div class="review-date">30 января 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Пришла к доктору Скальпелю после неудачного лечения в трех других клиниках. Его диагноз оказался точным, а лечение - невероятно эффективным. Атмосфера в кабинете мрачная, но это того стоит. Рекомендую всем, кто отчаялся.
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-badge">Диагностика</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Дмитрий П.</h4>
+                            <div class="review-date">12 мая 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Ребёнку в 12 лет поставил коронку на молочный зуб, который уже шатался! Зубной вырос кривой, весь ряд испортил. Неделю дитя суп через трубочку пило. Детей надо лечить, а не на них тренироваться.
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        
+                        
+                        
+                        
+                    </div>
+                    <div class="review-badge">Антилечение</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Анастасия В.</h4>
+                            <div class="review-date">3 июля 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Мне этот гений поставил виниры. Всю жизнь мечтала про голливудскую улыбку, скопила. А он, видите ли, решил, что свои зубы под виниры готовить — долго. Спилил мне здоровые, крепкие зубы почти под корень, будто карандаши заточил. Говорит, «так надёжнее». А его «шедевры» через три месяца посыпались, как осенняя листва. Один — откусила яблоко, другой — просто чихнула. Оставил мне во рту культи вместо зубов. Теперь мне на восстановление нужно втрое больше, чем я ему отдала. И моя «мечта» теперь ходит в съёмном протезе, как бабушка. Он не стоматолог, он зубной ликвидатор. Пришёл к нему за красотой — ушла с инвалидностью.
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        
+                    </div>
+                    <div class="review-badge">Лечение</div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="review-author">
+                            <h4>Мария М.</h4>
+                            <div class="review-date">22 сентября 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Пришёл к нему с одним кривым зубом. Уговорил на брекеты. Говорит, «выровняю всё, идеальный прикус сделаю». Год носил эту железяку. А он... он не лечил, он строил. Как плохой прораб. Сняли систему — а у меня зубы в шахматном порядке стоят, как после землетрясения. И главное — челюсть не смыкается. Жевать не могу, только жидкое глотаю. Он посмотрел и говорит: «А вы знаете, у вас особенность индивидуальная». Особенность... Да он мне новую особенность лица изготовил! Теперь я не человек, а ходячее предупреждение.
+                    </div>
+                    <div class="review-rating">
+                        
+                        
+                        
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="review-badge">Лечение</div>
+                </div>
+            </div>
+        <!-- Раздел добавления отзыва -->
+<section class="add-review-section" id="add-review">
+    <h2 class="section-title">Опишите вашу историю</h2>
+    
+    <div class="review-form-container">
+        <form id="reviewForm" class="review-form">
+            <!-- Скрытое поле для защиты от ботов -->
+            <div class="honeypot-field">
+                <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                <label for="website">Не заполняйте это поле</label>
+            </div>
+            
+            <!-- Поле для проверки времени заполнения -->
+            <input type="hidden" name="time_taken" id="time_taken" value="">
+            
+            <!-- Основные поля формы -->
+            <div class="form-group">
+                <label for="user_name">Ваше имя (или псевдоним):</label>
+                <input type="text" id="user_name" name="user_name" required 
+                       minlength="2" maxlength="50" 
+                       placeholder="Представьтесь, пожалуйста">
+            </div>
+            
+            <div class="form-group">
+                <label for="user_review">Ваша история:</label>
+                <textarea id="user_review" name="user_review" required 
+                          minlength="10" maxlength="1000" 
+                          rows="5" placeholder="Опишите ваш опыт"></textarea>
+                <div class="char-counter"><span id="charCount">0</span>/1000 символов</div>
+            </div>
+            
+            <!-- Капча с простым вопросом -->
+            <div class="captcha-group">
+                <label for="captcha">Сколько будет 7 + 3? (защита от спама):</label>
+                <input type="text" id="captcha" name="captcha" required 
+                       pattern="10|десять|ten" 
+                       placeholder="Введите ответ цифрами или словами">
+                <div class="captcha-hint">Ответ: 10 (цифрами) или "десять"</div>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                <label for="agree_terms">Я согласен(а) на публикацию отзыва на сайте</label>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">Отправить</button>
+            
+            <div class="form-status" id="formStatus"></div>
+        </form>
+        
+        <div class="reviews-list" id="reviewsList">
+            <!-- Здесь будут появляться добавленные отзывы -->
+        </div>
+    </div>
+</section>
+
+<style>
+.add-review-section {
+    padding: 50px 0;
+    background-color: #111;
+    border-top: 2px solid #8b0000;
+    border-bottom: 2px solid #8b0000;
+    margin: 40px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #8b0000;
+}
+
+.review-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.review-form {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #c0c0c0;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #8b0000;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.char-counter {
+    text-align: right;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.captcha-group {
+    background-color: #0a0a0a;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    margin: 25px 0;
+}
+
+.captcha-group label {
+    color: #e0e0e0;
+}
+
+.captcha-hint {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #a00000;
+}
+
+.submit-btn:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+.form-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+.form-status.success {
+    display: block;
+    background-color: rgba(0, 100, 0, 0.2);
+    color: #90ee90;
+    border: 1px solid #006400;
+}
+
+.form-status.error {
+    display: block;
+    background-color: rgba(139, 0, 0, 0.2);
+    color: #ff6b6b;
+    border: 1px solid #8b0000;
+}
+
+.reviews-list {
+    margin-top: 40px;
+}
+
+.review-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #8b0000;
+    margin-bottom: 20px;
+}
+
+.review-item h4 {
+    color: #e0e0e0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.review-item p {
+    color: #c0c0c0;
+    line-height: 1.6;
+}
+
+.review-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.honeypot-field {
+    position: absolute;
+    left: -9999px;
+    height: 0;
+    overflow: hidden;
+}
+</style>
+
+<script>
+// Защита от спама и обработка формы
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reviewForm');
+    const reviewsList = document.getElementById('reviewsList');
+    const charCount = document.getElementById('charCount');
+    const reviewTextarea = document.getElementById('user_review');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+    const timeTakenField = document.getElementById('time_taken');
+    
+    // Засекаем время начала заполнения формы
+    const formStartTime = Date.now();
+    
+    // Счетчик символов
+    reviewTextarea.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+    
+    // Обработка отправки формы
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Рассчитываем время заполнения формы
+        const formEndTime = Date.now();
+        const timeTaken = Math.floor((formEndTime - formStartTime) / 1000); // в секундах
+        timeTakenField.value = timeTaken;
+        
+        // Проверка на слишком быстрое заполнение (боты)
+        if (timeTaken < 5) {
+            showStatus('Слишком быстрая отправка. Пожалуйста, заполняйте форму внимательнее.', 'error');
+            return;
+        }
+        
+        // Проверка honeypot поля (должно быть пустым)
+        const honeypot = document.getElementById('website').value;
+        if (honeypot !== '') {
+            showStatus('Обнаружена подозрительная активность.', 'error');
+            return;
+        }
+        
+        // Проверка капчи
+        const captchaInput = document.getElementById('captcha').value.trim().toLowerCase();
+        const validAnswers = ['10', 'десять', 'ten'];
+        
+        if (!validAnswers.includes(captchaInput)) {
+            showStatus('Неправильный ответ на вопрос защиты.', 'error');
+            return;
+        }
+        
+        // Получаем данные формы
+        const userName = document.getElementById('user_name').value.trim();
+        const userReview = document.getElementById('user_review').value.trim();
+        
+        // Дополнительная проверка на минимальную длину
+        if (userReview.length < 10) {
+            showStatus('Отзыв слишком короткий. Напишите хотя бы 10 символов.', 'error');
+            return;
+        }
+        
+        // Проверка на возможный спам (слишком много ссылок)
+        const linkCount = (userReview.match(/http|www|\.com|\.ru|\.рф/gi) || []).length;
+        if (linkCount > 2) {
+            showStatus('Отзыв содержит слишком много ссылок.', 'error');
+            return;
+        }
+        
+        // Блокируем кнопку отправки
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+        
+        // Имитируем отправку на сервер (в реальном проекте здесь должен быть AJAX запрос)
+        setTimeout(function() {
+            // Сохраняем в LocalStorage
+            saveReviewToStorage(userName, userReview);
+            
+            // Добавляем отзыв в список
+            addReviewToList(userName, userReview);
+            
+            // Показываем статус успеха
+            showStatus('Ваш отзыв успешно добавлен и появится после модерации!', 'success');
+            
+            // Очищаем форму
+            form.reset();
+            charCount.textContent = '0';
+            
+            // Разблокируем кнопку
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить отзыв';
+            
+            // Прокручиваем к списку отзывов
+            reviewsList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 1000);
+    });
+    
+    // Функция сохранения в LocalStorage
+    function saveReviewToStorage(name, review) {
+        try {
+            // Получаем существующие отзывы
+            let reviews = JSON.parse(localStorage.getItem('doctorReviews')) || [];
+            
+            // Добавляем новый отзыв
+            const newReview = {
+                id: Date.now(),
+                name: name,
+                review: review,
+                date: new Date().toLocaleDateString('ru-RU'),
+                timestamp: Date.now(),
+                moderated: false // Флаг модерации
+            };
+            
+            reviews.unshift(newReview); // Добавляем в начало
+            
+            // Сохраняем (ограничиваем 50 последними отзывами)
+            if (reviews.length > 50) {
+                reviews = reviews.slice(0, 50);
+            }
+            
+            localStorage.setItem('doctorReviews', JSON.stringify(reviews));
+            
+            // Отправка уведомления на сервер (в реальном проекте)
+            // sendToServer(newReview);
+            
+        } catch (error) {
+            console.error('Ошибка сохранения отзыва:', error);
+        }
+    }
+    
+    // Функция добавления отзыва в список
+    function addReviewToList(name, review) {
+        const reviewItem = document.createElement('div');
+        reviewItem.className = 'review-item';
+        
+        const currentDate = new Date().toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        
+        reviewItem.innerHTML = `
+            <h4>${escapeHtml(name)}</h4>
+            <p>${escapeHtml(review)}</p>
+            <div class="review-date">${currentDate} (ожидает модерации)</div>
+        `;
+        
+        reviewsList.prepend(reviewItem);
+    }
+    
+    // Функция показа статуса
+    function showStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = `form-status ${type}`;
+        
+        // Автоматическое скрытие через 5 секунд
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 5000);
+    }
+    
+    // Функция экранирования HTML (защита от XSS)
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Загрузка сохраненных отзывов при загрузке страницы
+    function loadSavedReviews() {
+        try {
+            const savedReviews = JSON.parse(localStorage.getItem('doctorReviews')) || [];
+            
+            // Показываем только последние 5 отзывов
+            const recentReviews = savedReviews.slice(0, 5);
+            
+            recentReviews.forEach(review => {
+                if (review.moderated || review.review) { // Показываем все, но можно добавить проверку на moderated
+                    const reviewItem = document.createElement('div');
+                    reviewItem.className = 'review-item';
+                    
+                    reviewItem.innerHTML = `
+                        <h4>${escapeHtml(review.name)}</h4>
+                        <p>${escapeHtml(review.review)}</p>
+                        <div class="review-date">${review.date}</div>
+                    `;
+                    
+                    reviewsList.appendChild(reviewItem);
+                }
+            });
+        } catch (error) {
+            console.error('Ошибка загрузки отзывов:', error);
+        }
+    }
+    
+    // Загружаем сохраненные отзывы
+    loadSavedReviews();
+    
+    // Очистка старых отзывов (старше 30 дней)
+    function cleanupOldReviews() {
+        try {
+            const reviews = JSON.parse(localStorage.getItem('doctorReviews')) || [];
+            const monthAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+            
+            const recentReviews = reviews.filter(review => review.timestamp > monthAgo);
+            
+            if (recentReviews.length !== reviews.length) {
+                localStorage.setItem('doctorReviews', JSON.stringify(recentReviews));
+            }
+        } catch (error) {
+            console.error('Ошибка очистки старых отзывов:', error);
+        }
+    }
+    
+    // Запускаем очистку при загрузке
+    cleanupOldReviews();
+});
+
+// В реальном проекте добавьте эту функцию для отправки на сервер:
+/*
+function sendToServer(reviewData) {
+    fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reviewData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Отзыв отправлен на сервер:', data);
+    })
+    .catch(error => {
+        console.error('Ошибка отправки:', error);
+    });
+}
+*/
+</script>
+    </main>
+    <footer id="contact">
+            
+            <div class="copyright">
+                <p>&copy; 2026. Caveant cives.</p>
+                <p style="margin-top: 5px;">Этот ресурс — живой архив, созданный обществом для самозащиты. Мы документируем, чтобы предупредить. Мы обличаем, чтобы обезопасить. Наша цель — сделать ваше следующее посещение стоматолога информированным, а значит — безопасным.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Проверка наличия фото доктора и замена на заглушку при необходимости
+        document.addEventListener('DOMContentLoaded', function() {
+            const doctorImage = document.getElementById('doctor-image');
+            doctorImage.onerror = function() {
+                this.src = 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80';
+                this.alt = 'Доктор (изображение по умолчанию)';
+                document.querySelector('.photo-note').innerHTML = '*Файл 1ФОТО.jpg не найден. Используется изображение по умолчанию';
+            };
+            
+            // Добавляем плавную прокрутку для навигации
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
